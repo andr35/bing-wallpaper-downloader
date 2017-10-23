@@ -2,10 +2,11 @@ import {Payload} from './payload';
 import {WriteStream} from "fs";
 import {exec, execSync} from 'child_process';
 import * as http from 'http';
+import * as https from 'https';
 import * as fs from 'fs';
 // import * as Jimp from 'jimp';
 
-const NG_URL = 'http://www.nationalgeographic.com/photography/photo-of-the-day/_jcr_content/.gallery.json';
+const NG_URL = 'https://www.nationalgeographic.com/photography/photo-of-the-day/_jcr_content/.gallery.json';
 const PHOTO_PATH = process.env['HOME'] + '/.wallpaper.jpg';
 
 if (isWallpaperAlreadySet()) {
@@ -33,8 +34,9 @@ if (isWallpaperAlreadySet()) {
 function fetchData(): Promise<Payload> {
   return new Promise<Payload>((resolve, reject) => {
 
-    http.get(NG_URL, res => {
-      const status = (res as any).statusCode;
+    https.get(NG_URL, res => {
+      const status = res.statusCode;
+      res.statusCode
       const contentType = res.headers['content-type'];
 
       if (status !== 200) {
@@ -106,7 +108,11 @@ function isWallpaperAlreadySet(): boolean {
 }
 
 function isCinnamon(): boolean {
-  return execSync('gsettings writable org.cinnamon.desktop.background picture-uri').toString('utf8').indexOf('true') !== -1;
+  try{
+    return execSync('gsettings writable org.cinnamon.desktop.background picture-uri').toString('utf8').indexOf('true') !== -1;
+  } catch (e) {
+    return false;
+  }
 }
 
 function exitWithError(err: string) {
