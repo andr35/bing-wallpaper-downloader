@@ -1,30 +1,49 @@
 import {Payload} from './payload';
 import {WriteStream} from "fs";
 import {exec, execSync} from 'child_process';
-import * as http from 'http';
-import * as https from 'https';
+import {notify} from 'node-notifier';
+
 import * as fs from 'fs';
+import * as path from 'path';
+import * as https from 'https';
 // import * as Jimp from 'jimp';
 
 const NG_URL = 'https://www.nationalgeographic.com/photography/photo-of-the-day/_jcr_content/.gallery.json';
-const PHOTO_PATH = process.env['HOME'] + '/.wallpaper.jpg';
+const PHOTO_PATH = path.join(process.env['HOME'], '.wallpaper.jpg');
 
-if (isWallpaperAlreadySet()) {
-  console.log('> Wallpaper already set');
+// Args
+const SHOW_NOTIFICATION = process.argv.indexOf('show-notification') !== -1;
+const FORCE_DOWNLOAD = process.argv.indexOf('force-download') !== -1;
+
+if (isWallpaperAlreadySet() && !FORCE_DOWNLOAD) { // && !SHOW_NOTIFICATION
+  console.log('> Wallpaper already downloaded');
 } else {
+
   fetchData()
     .then(res => {
       const photoUrl = res.items[0].url + res.items[0].originalUrl;
       const file = fs.createWriteStream(PHOTO_PATH);
       fetchPhoto(photoUrl, file)
         .then(done => {
-          // writeCaption(res.items[0].title, res.items[0].caption.replace(/<.?.>/g, ''))
-          // .then(done => {
-          setWallpaper(PHOTO_PATH)
-            .then(done => console.log('> Wallpaper set.'))
-            .catch(err => exitWithError(err));
-          // })
-          // .catch(err => exitWithError(err));
+
+          const title = res.items[0].title;
+          const caption = res.items[0].caption.replace(/<.?.>/g, '');
+
+
+          if (SHOW_NOTIFICATION) {
+            showNotification(title, caption);
+
+          } else {
+
+            // writeCaption(title, caption)
+            // .then(done => {
+            setWallpaper(PHOTO_PATH)
+              .then(done => console.log('> Wallpaper set.'))
+              .catch(err => exitWithError(err));
+            // })
+            // .catch(err => exitWithError(err));
+          }
+
         })
         .catch(err => exitWithError(err));
     })
@@ -60,7 +79,7 @@ function fetchData(): Promise<Payload> {
 
 function fetchPhoto(url: string, stream: WriteStream): Promise<any> {
   return new Promise<boolean>((resolve, reject) => {
-    http.get(url, res => {
+    https.get(url, res => {
       const status = (res as any).statusCode;
 
       if (status !== 200) {
@@ -108,12 +127,22 @@ function isWallpaperAlreadySet(): boolean {
 }
 
 function isCinnamon(): boolean {
-  try{
+  try {
     return execSync('gsettings writable org.cinnamon.desktop.background picture-uri').toString('utf8').indexOf('true') !== -1;
   } catch (e) {
     return false;
   }
 }
+
+function showNotification(title: string = 'Unknown', message: string = 'National Geographic photo of the day') {
+  notify({
+    title: `Wallpaper - ${title}`,
+    message,
+    icon: PHOTO_PATH,
+    urgency: 'critical'
+  } as any);
+}
+
 
 function exitWithError(err: string) {
   console.error('> Error', err);

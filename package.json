@@ -1,6 +1,6 @@
 {
   "name": "national-geographic-wallpaper",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Andrea",
   "description": "National Geographic Photo of the Day as wallpaper.",
   "license": "ISC",
@@ -10,14 +10,18 @@
   "scripts": {
     "start": "node dist/index.js",
     "build": "tsc",
-    "build:w": "tsc -w"
+    "build:w": "tsc -w",
+    "package": "npm run build && pkg dist/index.js --out-path out"
   },
   "dependencies": {
-    "jimp": "^0.2.28"
+    "jimp": "^0.2.28",
+    "node-notifier": "^5.1.2"
   },
   "devDependencies": {
     "@types/jimp": "^0.2.1",
-    "@types/node": "~8.0.7",
-    "typescript": "~2.4.1"
+    "@types/node": "^8.0.57",
+    "@types/node-notifier": "^0.0.28",
+    "pkg": "^4.3.0-beta.1",
+    "typescript": "^2.6.2"
   }
 }
