@@ -1,6 +1,7 @@
 import {Payload} from './payload';
 import {WriteStream} from "fs";
 import {exec, execSync} from 'child_process';
+import {homedir, tmpdir} from 'os';
 import {notify} from 'node-notifier';
 
 import * as fs from 'fs';
@@ -9,7 +10,8 @@ import * as https from 'https';
 // import * as Jimp from 'jimp';
 
 const NG_URL = 'https://www.nationalgeographic.com/photography/photo-of-the-day/_jcr_content/.gallery.json';
-const PHOTO_PATH = path.join(process.env['HOME'], '.wallpaper.jpg');
+const PHOTO_PATH = path.join(homedir(), '.wallpaper.jpg');
+const PHOTO_PATH_TMP = path.join(tmpdir(), 'wallpaper.jpg');
 
 // Args
 const SHOW_NOTIFICATION = process.argv.indexOf('show-notification') !== -1;
@@ -22,7 +24,7 @@ if (isWallpaperAlreadySet() && !FORCE_DOWNLOAD) { // && !SHOW_NOTIFICATION
   fetchData()
     .then(res => {
       const photoUrl = res.items[0].url + res.items[0].originalUrl;
-      const file = fs.createWriteStream(PHOTO_PATH);
+      const file = fs.createWriteStream(SHOW_NOTIFICATION ? PHOTO_PATH_TMP : PHOTO_PATH);
       fetchPhoto(photoUrl, file)
         .then(done => {
 
@@ -31,7 +33,7 @@ if (isWallpaperAlreadySet() && !FORCE_DOWNLOAD) { // && !SHOW_NOTIFICATION
 
 
           if (SHOW_NOTIFICATION) {
-            showNotification(title, caption);
+            showNotification(PHOTO_PATH_TMP, title, caption);
 
           } else {
 
@@ -134,11 +136,11 @@ function isCinnamon(): boolean {
   }
 }
 
-function showNotification(title: string = 'Unknown', message: string = 'National Geographic photo of the day') {
+function showNotification(iconPath: string, title: string = 'Unknown', message: string = 'National Geographic photo of the day') {
   notify({
     title: `Wallpaper - ${title}`,
     message,
-    icon: PHOTO_PATH,
+    icon: iconPath,
     urgency: 'critical'
   } as any);
 }
