@@ -16,41 +16,56 @@ const PHOTO_PATH_TMP = path.join(tmpdir(), 'wallpaper.jpg');
 // Args
 const SHOW_NOTIFICATION = process.argv.indexOf('show-notification') !== -1;
 const FORCE_DOWNLOAD = process.argv.indexOf('force-download') !== -1;
+// Counter of the image to take from the current day backwards
+const prevDayIndex = process.argv.indexOf('prev-day');
+const PREV_DAY = prevDayIndex ? (parseInt(process.argv[prevDayIndex + 1] || '0') || 0) : 0;
 
-if (isWallpaperAlreadySet() && !FORCE_DOWNLOAD) { // && !SHOW_NOTIFICATION
-  console.log('> Wallpaper already downloaded');
-} else {
+// Run script
+script();
 
-  fetchData()
-    .then(res => {
-      const photoUrl = res.items[0].url + res.items[0].originalUrl;
+async function script() {
+
+  if (isWallpaperAlreadySet() && !FORCE_DOWNLOAD) { // && !SHOW_NOTIFICATION
+    console.log('> Wallpaper already downloaded');
+  } else {
+
+    console.log(PREV_DAY ? `'Downloading photo of ${PREV_DAY} days backward...` : 'Downloading photo of today');
+
+    try {
+      const res = await fetchData();
+
+      const item = res.items[PREV_DAY];
+      // Checkif requested photo of the day exists in NG gallery (NB: only photos of the current month are available)
+      if (!item) {
+        exitWithError('There is no photo for the day requested');
+      }
+      const photoUrl = item.url + item.originalUrl;
       const file = fs.createWriteStream(SHOW_NOTIFICATION ? PHOTO_PATH_TMP : PHOTO_PATH);
-      fetchPhoto(photoUrl, file)
-        .then(done => {
+      const done = await fetchPhoto(photoUrl, file);
 
-          const title = res.items[0].title;
-          const caption = res.items[0].caption.replace(/<.?.>/g, '');
+      const title = item.title;
+      const caption = item.caption.replace(/<.?.>/g, '');
 
+      if (SHOW_NOTIFICATION) {
+        showNotification(PHOTO_PATH_TMP, title, caption);
 
-          if (SHOW_NOTIFICATION) {
-            showNotification(PHOTO_PATH_TMP, title, caption);
+      } else {
 
-          } else {
+        // writeCaption(title, caption)
+        // .then(done => {
+        const done = await setWallpaper(PHOTO_PATH);
+        console.log('> Wallpaper set.');
+        // })
+        // .catch(err => exitWithError(err));
+      }
 
-            // writeCaption(title, caption)
-            // .then(done => {
-            setWallpaper(PHOTO_PATH)
-              .then(done => console.log('> Wallpaper set.'))
-              .catch(err => exitWithError(err));
-            // })
-            // .catch(err => exitWithError(err));
-          }
+    } catch (err) {
+      exitWithError(err);
+    }
 
-        })
-        .catch(err => exitWithError(err));
-    })
-    .catch(err => exitWithError(err));
+  }
 }
+
 
 function fetchData(): Promise<Payload> {
   return new Promise<Payload>((resolve, reject) => {

@@ -1,19 +1,27 @@
 # National Geographic Wallpaper
 
-This script download the National Geographic Photo of the Day and 
+This simple script downloads the National Geographic Photo of the Day and 
 set it as wallpaper.
 
 ## Optional arguments:
 
 #### show-notification
 
-Use `node dist/index.js show-notification` to create a notification having as icon the new downloaded image without applying is as wallpaper.
+Use `node dist/index.js show-notification` to create a notification having as 
+icon the new downloaded image without applying is as wallpaper.
 
 #### force-download
 
-Use `node dist/index.js force-download` to force the re-download of the photo if it was previously downloaded.
+Use `node dist/index.js force-download` to force the re-download of the photo if 
+it was previously downloaded.
 
-NB: The 2 arguments can be used togheter.
+#### prev-day n
+
+Use `node dist/index.js prev-day n` to request the photo of the day of a backward day
+(eg: `node dist/index.js prev-day 1` will download the photo of yesterday).
+__Only the photos of the current month are available.__
+
+NB: The 3 arguments can be used togheter.
 
 ## How to
 
