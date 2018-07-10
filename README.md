@@ -3,6 +3,8 @@
 This simple script downloads the National Geographic Photo of the Day and 
 set it as wallpaper.
 
+https://www.nationalgeographic.com/photography/photo-of-the-day/
+
 ## Optional arguments:
 
 #### show-notification
