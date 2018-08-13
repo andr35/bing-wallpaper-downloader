@@ -1,12 +1,12 @@
-import {Payload} from './payload';
-import {WriteStream} from "fs";
 import {exec, execSync} from 'child_process';
-import {homedir, tmpdir} from 'os';
-import {notify} from 'node-notifier';
-
 import * as fs from 'fs';
-import * as path from 'path';
+import {WriteStream} from "fs";
 import * as https from 'https';
+import {notify} from 'node-notifier';
+import {homedir, tmpdir} from 'os';
+import * as path from 'path';
+import {Payload} from './payload';
+
 // import * as Jimp from 'jimp';
 
 const NG_URL = 'https://www.nationalgeographic.com/photography/photo-of-the-day/_jcr_content/.gallery.json';
@@ -39,9 +39,10 @@ async function script() {
       if (!item) {
         exitWithError('There is no photo for the day requested');
       }
-      const photoUrl = item.url + item.originalUrl;
+      // const photoUrl = item.url + item.originalUrl;
+      const photoUrl = item.originalUrl;
       const file = fs.createWriteStream(SHOW_NOTIFICATION ? PHOTO_PATH_TMP : PHOTO_PATH);
-      const done = await fetchPhoto(photoUrl, file);
+      await fetchPhoto(photoUrl, file);
 
       const title = item.title;
       const caption = item.caption.replace(/<.?.>/g, '');
@@ -53,7 +54,7 @@ async function script() {
 
         // writeCaption(title, caption)
         // .then(done => {
-        const done = await setWallpaper(PHOTO_PATH);
+        await setWallpaper(PHOTO_PATH);
         console.log('> Wallpaper set.');
         // })
         // .catch(err => exitWithError(err));
@@ -112,7 +113,7 @@ function fetchPhoto(url: string, stream: WriteStream): Promise<any> {
 function setWallpaper(photoPath: string): Promise<boolean> {
   return new Promise<boolean>((resolve, reject) => {
     const key = isCinnamon() ? 'org.cinnamon.desktop.background' : 'org.gnome.desktop.background';
-    exec(`gsettings set ${key} picture-uri file://${photoPath}`, (error, stdout, stderr) => {
+    exec(`gsettings set ${key} picture-uri file://${photoPath}`, (error, _stdout, _stderr) => {
       return !error ? resolve(true) : reject(error)
     });
   });
