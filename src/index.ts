@@ -9,7 +9,8 @@ import {Payload} from './payload';
 
 // import * as Jimp from 'jimp';
 
-const NG_URL = 'https://www.nationalgeographic.com/photography/photo-of-the-day/_jcr_content/.gallery.json';
+// const NG_URL = 'https://www.nationalgeographic.com/photography/photo-of-the-day/_jcr_content/.gallery.json';
+const NG_URL = 'https://www.nationalgeographic.com/photography/photo-of-the-day/_jcr_content/.gallery.json?user.testname=none';
 const PHOTO_PATH = path.join(homedir(), '.wallpaper.jpg');
 const PHOTO_PATH_TMP = path.join(tmpdir(), 'wallpaper.jpg');
 
