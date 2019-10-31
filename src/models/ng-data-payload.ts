@@ -10,6 +10,9 @@ export interface NGDataPayload {
     'full-path-url': string;
     url: string;
     originalUrl: string;
+    image: {
+      uri: string;
+    }
     aspectRatio: number;
     sizes: {
       '240': string;

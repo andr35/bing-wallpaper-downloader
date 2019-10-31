@@ -61,7 +61,10 @@ async function runWallpaperScript(prevDay: number = 0, force: boolean, showNotif
 
 
       // const photoUrl = item.url + item.originalUrl;
-      const photoUrl = item.originalUrl || item.url;
+      const photoUrl = item.originalUrl || item.url || item.image.uri;
+
+      console.log(item);
+
 
       const filePath = showNotification ? AppConstants.DEFAULT_PHOTO_PATH_TMP : AppConstants.DEFAULT_PHOTO_PATH;
       const writer = createWriteStream(filePath);
