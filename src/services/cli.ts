@@ -63,15 +63,12 @@ async function runWallpaperScript(prevDay: number = 0, force: boolean, showNotif
       // const photoUrl = item.url + item.originalUrl;
       const photoUrl = item.originalUrl || item.url || item.image.uri;
 
-      console.log(item);
-
-
       const filePath = showNotification ? AppConstants.DEFAULT_PHOTO_PATH_TMP : AppConstants.DEFAULT_PHOTO_PATH;
       const writer = createWriteStream(filePath);
       await downloaderService.fetchPhoto(photoUrl, writer);
 
-      const title = item.title;
-      const caption = item.caption.replace(/<.?.>/g, '');
+      const title = item.image.title;
+      const caption = item.image.caption.replace(/<.?.>/g, '');
 
       if (showNotification) {
         notificationService.showNotification(filePath, title, caption);

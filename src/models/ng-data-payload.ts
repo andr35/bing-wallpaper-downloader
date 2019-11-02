@@ -2,17 +2,17 @@ export interface NGDataPayload {
   galleryTitle: string;
   previousEndpoint: string;
   items: {
-    title: string;
-    caption: string;
-    credit: string;
     profileUrl: string;
-    altText: string;
     'full-path-url': string;
     url: string;
     originalUrl: string;
     image: {
       uri: string;
-    }
+      title: string;
+      caption: string;
+      credit: string;
+      alt_text: string;
+    };
     aspectRatio: number;
     sizes: {
       '240': string;
