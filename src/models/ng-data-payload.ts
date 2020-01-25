@@ -32,7 +32,7 @@ export interface NGDataPayload {
       'og:title': string;
       'og:description': string;
       'twitter:site': string;
-    },
+    };
     livefyre: {
       pageGuid: string;
       checksum: string;
@@ -41,6 +41,6 @@ export interface NGDataPayload {
       lfSiteId: string;
       lfNetworkName: string;
       lfElement: string;
-    }
+    };
   }[]
 }
