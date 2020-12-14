@@ -1,0 +1,11 @@
+[package]
+name = "bing_wallpaper_downloader"
+version = "0.1.0"
+authors = ["Andrea Zorzi <andrea.zorzi.za@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = "2.33.3"
+reqwest = "0.10.9"
