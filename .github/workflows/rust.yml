@@ -8,11 +8,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Install required dependencies
         run: |
-          apt-get update
-          apt-get -y install --no-install-recommends libdbus-1-dev
+          sudo apt-get update
+          sudo apt-get -y install --no-install-recommends libdbus-1-dev
 
       - uses: actions-rs/toolchain@v1
         with:
@@ -38,8 +38,8 @@ jobs:
 
       - name: Install required dependencies
         run: |
-          apt-get update
-          apt-get -y install --no-install-recommends libdbus-1-dev
+          sudo apt-get update
+          sudo apt-get -y install --no-install-recommends libdbus-1-dev
 
       - uses: actions-rs/toolchain@v1
         with:
