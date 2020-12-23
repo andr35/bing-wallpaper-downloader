@@ -19,7 +19,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     .version("v0.1.0")
     .subcommand(
       SubCommand::with_name("download")
-        .about("Download the Bing photo of the day")
+        .about("Download the Bing photo of the day and set is as desktop wallpaper or show it into a desktop notification")
         .arg(
           Arg::with_name("output-path")
             .long("output-path")
