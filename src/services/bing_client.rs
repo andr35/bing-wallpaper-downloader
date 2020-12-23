@@ -3,8 +3,8 @@ use bytes::Bytes;
 use reqwest::header::ACCEPT;
 use reqwest::Url;
 
-const BING_BASE_URL: &'static str = "https://bing.com";
-const BING_DATA_PATH: &'static str = "/HPImageArchive.aspx";
+const BING_BASE_URL: &str = "https://bing.com";
+const BING_DATA_PATH: &str = "/HPImageArchive.aspx";
 
 // const BING_URL: &'static str = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=8";
 

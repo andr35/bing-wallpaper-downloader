@@ -29,7 +29,9 @@ impl NotificationManager {
         "set_wp" => {
           WallpaperManager::set_as_wallpaper(img_url).expect("Fail to set desktop wallpaper");
         }
-        _ => (),
+        _ => {
+          log::info!("Action cancelled");
+        }
       });
 
     Ok(())

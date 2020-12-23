@@ -2,8 +2,7 @@ mod models;
 
 use crate::models::APP_TITLE;
 use clap::{App, Arg, SubCommand};
-use env_logger;
-use log::{error, LevelFilter};
+use log::LevelFilter;
 use std::process;
 
 #[tokio::main]
@@ -49,7 +48,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   match res {
     Ok(_) => Ok(()),
     Err(e) => {
-      error!("Application error: {}", e);
+      log::error!("Application error: {}", e);
       // eprintln!("Application error: {}", e);
       process::exit(1);
     }

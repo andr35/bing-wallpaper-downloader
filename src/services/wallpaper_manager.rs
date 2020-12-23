@@ -1,5 +1,3 @@
-use wallpaper;
-
 pub struct WallpaperManager {}
 
 impl WallpaperManager {

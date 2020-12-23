@@ -4,7 +4,7 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::path::PathBuf;
 
-const IMG_NAME: &'static str = ".wallpaper.jpg";
+const IMG_NAME: &str = ".wallpaper.jpg";
 
 pub struct FileManager {}
 
