@@ -1,27 +1,48 @@
+mod models;
+mod services;
+
+use crate::models::AppError;
+use crate::services::{BingClient, FileManager, NotificationManager, WallpaperManager};
+use clap::ArgMatches;
+use log::{error, info};
 use std::error::Error;
 
-use clap::ArgMatches;
-
-pub fn run(app_matches: ArgMatches) -> Result<(), Box<dyn Error>> {
+pub async fn run(app_matches: ArgMatches<'_>) -> Result<(), Box<dyn Error>> {
+  // Run commands
   match app_matches.subcommand() {
-    // Test cmd
-    ("test", Some(sub_m)) => {
-      let d = sub_m.value_of("debug");
+    // Download command
+    ("download", Some(sub_m)) => {
+      info!("Download image...");
 
-      match d {
-        Some(dd) => {
-          println!("With debug val {}", dd);
-        }
-        None => {
-          println!("With no debug");
-        }
+      // First -> Get image info
+      let data = BingClient::fetch_bing_data().await?;
+      let img = data.images.get(0).expect("No image available");
+      let img_url = img.url.clone();
+      let img_bytes = BingClient::fetch_bing_photo(&img_url).await?;
+      // Save image in fs
+      let img_save_path =
+        FileManager::save_wallpaper(img_bytes.as_ref(), sub_m.value_of("output-path"))?;
+
+      info!("Image downloaded in folder {}", &img_save_path);
+
+      // Show notification
+      if sub_m.is_present("show-notification") {
+        info!("Show notification with photo of the day...");
+        NotificationManager::show_notification("", &img.copyright, &img_save_path)?;
       }
+
+      // Set as wallpaper
+      if sub_m.is_present("set-as-wallpaper") {
+        WallpaperManager::set_as_wallpaper(&img_url)?;
+        info!("Photo of the day set a desktop wallpaper!");
+      }
+
+      Ok(())
     }
 
     _ => {
-      println!("Ohoh... unknown cmd")
+      error!("Ohoh... unknown command. Use --help for more information");
+      Err(Box::new(AppError::new("Unknown command")))
     }
   }
-
-  Ok(())
 }

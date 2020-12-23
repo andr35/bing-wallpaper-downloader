@@ -2,9 +2,13 @@
 
 FROM mcr.microsoft.com/vscode/devcontainers/rust:0-1
 
+# Required for desktop notifications
+# See: https://github.com/mviereck/x11docker/wiki/How-to-connect-container-to-DBus-from-host#dbus-user-session-daemon
+ENV DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+
 # [Optional] Uncomment this section to install additional packages.
-# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-#     && apt-get -y install --no-install-recommends your-list-here
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+  && apt-get -y install --no-install-recommends dbus libdbus-1-dev libnotify-bin
 
 # Replace sh with bash
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
