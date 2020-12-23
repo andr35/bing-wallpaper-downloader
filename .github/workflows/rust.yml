@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@v1.0.0
         with:
           name: bing_wallpaper_downloader
-          path: target/release
+          path: target/release/bing_wallpaper_downloader
 
   clippy_check:
     runs-on: ubuntu-latest
