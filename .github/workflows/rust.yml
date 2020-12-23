@@ -4,11 +4,16 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
+      
+      - name: Install required dependencies
+        run: |
+          apt-get update
+          apt-get -y install --no-install-recommends libdbus-1-dev
+
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
@@ -24,3 +29,23 @@ jobs:
         with:
           name: bing_wallpaper_downloader
           path: target/release
+
+  clippy_check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install required dependencies
+        run: |
+          apt-get update
+          apt-get -y install --no-install-recommends libdbus-1-dev
+
+      - uses: actions-rs/toolchain@v1
+        with:
+            toolchain: stable
+            components: clippy
+            override: true
+      - uses: actions-rs/clippy-check@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
