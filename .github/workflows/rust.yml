@@ -86,7 +86,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./target/release/bing_wallpaper_downloader
+          asset_path: ./bing_wallpaper_downloader/bing_wallpaper_downloader
           asset_name: bing_wallpaper_downloader
           asset_content_type: application/x-executable
 
