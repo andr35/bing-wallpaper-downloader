@@ -1,6 +1,6 @@
 [package]
 name = "bing_wallpaper_downloader"
-version = "0.0.0"
+version = "0.1.0"
 authors = ["Andrea Zorzi <andrea.zorzi.za@gmail.com>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
