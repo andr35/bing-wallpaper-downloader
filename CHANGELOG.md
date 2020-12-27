@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](///compare/v0.1.1...v0.2.0) (2020-12-27)
+
+
+### Features
+
+* ✨ allow to download the images of previous days ([624aa18](///commit/624aa180f01eb95c1e7fc2c063b0e35e1b1720aa))
+
 ### [0.1.1](///compare/v0.1.0...v0.1.1) (2020-12-27)
 
 ## 0.1.0 (2020-12-27)

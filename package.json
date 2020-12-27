@@ -1,6 +1,6 @@
 {
   "name": "bing-wallpaper-downloader",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "author": "Andrea",
   "description": "Simple CLI app that downloads the Bing Wallpaper of the day and set it as wallpaper",
   "license": "MIT OR Apache-2.0",
