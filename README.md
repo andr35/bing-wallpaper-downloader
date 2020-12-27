@@ -70,7 +70,7 @@ Different versions of this app written in different languages.
 | Language | Link                                                                                                 |
 | -------- | ---------------------------------------------------------------------------------------------------- |
 | Python   | <https://github.com/Andr35/NG-Wallpaper> (NB: it downloads the National Geographic Photo of the Day) |
-| Node     | <https://github.com/Andr35/bing-wallpaper-downloader>                                                |
+| Node     | <https://github.com/Andr35/national-geographic-wallpaper/tree/node>                                                |
 | Rust     | <https://github.com/Andr35/bing-wallpaper-downloader>                                                |
 
 ## License
