@@ -32,7 +32,7 @@ pub async fn run(app_matches: ArgMatches<'_>) -> Result<(), Box<dyn Error>> {
 
       // Set as wallpaper
       if sub_m.is_present("set-as-wallpaper") {
-        WallpaperManager::set_as_wallpaper(&img_url)?;
+        WallpaperManager::set_as_wallpaper(&img_save_path)?;
         log::info!("Photo of the day set a desktop wallpaper!");
       }
 

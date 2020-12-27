@@ -1,6 +1,6 @@
 mod models;
 
-use crate::models::APP_TITLE;
+use crate::models::{APP_TITLE, APP_VERSION};
 use clap::{App, Arg, SubCommand};
 use log::LevelFilter;
 use std::process;
@@ -16,7 +16,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
   // Parse CLI args
   let matches = App::new(APP_TITLE)
-    .version("v0.1.0")
+    .version(APP_VERSION)
     .subcommand(
       SubCommand::with_name("download")
         .about("Download the Bing photo of the day and set is as desktop wallpaper or show it into a desktop notification")

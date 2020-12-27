@@ -13,6 +13,7 @@ impl Display for AppError {
 }
 
 impl AppError {
+  #[allow(unused)]
   pub fn new(msg: &str) -> AppError {
     AppError {
       details: msg.to_string(),
