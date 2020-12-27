@@ -25,7 +25,31 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             .long("output-path")
             .short("o")
             .takes_value(true)
+            .value_name("OUTPUT_PATH")
             .help("Output path where save downloaded wallpaper (e.g. /home/user/wallpaper.jpg)"),
+        )
+        .arg(
+          Arg::with_name("prev-days")
+            .long("prev-days")
+            .short("p")
+            .takes_value(true)
+            .value_name("PREV_DAYS")
+            .default_value("0")
+            .validator(|val: String| {
+              // Try to parse
+              match val.parse::<i8>() {
+                Ok(val_int) => {
+                  // Check constraints
+                  if val_int >= 0 && val_int <= 14 {
+                    Ok(())
+                  } else {
+                    Err(String::from("Value must be between 0 and 14"))
+                  }
+                },
+                Err(_) => Err(String::from("Value must be an integer"))
+              }
+            })
+            .help("Specify which image to download, i.e. download the image of the day of x days ago (max 14 days ago)."),
         )
         .arg(
           Arg::with_name("show-notification")

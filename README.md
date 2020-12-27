@@ -34,6 +34,12 @@ is not provided the image will be saved in a predefined folder:
 ./bing_wallpaper_downloader download -o $HOME/Downloads/myimage.jpg 
 ```
 
+Download image of a previous day, e.g., the image of 2 days ago:
+
+```bash
+./bing_wallpaper_downloader download -o $HOME/Downloads/myimage.jpg -p 2
+```
+
 Download the image of tha day and set it as wallpaper:
 
 ```bash
@@ -70,7 +76,7 @@ Different versions of this app written in different languages.
 | Language | Link                                                                                                 |
 | -------- | ---------------------------------------------------------------------------------------------------- |
 | Python   | <https://github.com/Andr35/NG-Wallpaper> (NB: it downloads the National Geographic Photo of the Day) |
-| Node     | <https://github.com/Andr35/national-geographic-wallpaper/tree/node>                                                |
+| Node     | <https://github.com/Andr35/national-geographic-wallpaper/tree/node>                                  |
 | Rust     | <https://github.com/Andr35/bing-wallpaper-downloader>                                                |
 
 ## License

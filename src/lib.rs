@@ -13,9 +13,13 @@ pub async fn run(app_matches: ArgMatches<'_>) -> Result<(), Box<dyn Error>> {
     ("download", Some(sub_m)) => {
       log::info!("Download image...");
 
+      let prev_days = sub_m
+        .value_of("prev-days")
+        .expect("Missing prev day")
+        .parse::<i8>()?;
+
       // First -> Get image info
-      let data = BingClient::fetch_bing_data().await?;
-      let img = data.images.get(0).expect("No image available");
+      let img = BingClient::fetch_bing_data_image(prev_days).await?;
       let img_url = img.url.clone();
       let img_bytes = BingClient::fetch_bing_photo(&img_url).await?;
       // Save image in fs

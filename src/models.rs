@@ -3,5 +3,5 @@ mod bing_data_payload;
 mod constants;
 
 pub use app_error::AppError;
-pub use bing_data_payload::BingDataPayload;
+pub use bing_data_payload::*;
 pub use constants::*;
