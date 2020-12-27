@@ -6,14 +6,18 @@
   "license": "MIT OR Apache-2.0",
   "repository": "https: //github.com/Andr35/national-geographic-wallpaper",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "release:patch": "standard-version --release-as patch",
+    "release:minor": "standard-version --release-as minor"
+  },
   "dependencies": {},
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "cz-conventional-changelog": "^3.3.0",
     "devmoji": "^2.1.12",
-    "husky": "^4.3.4"
+    "husky": "^4.3.4",
+    "standard-version": "^9.0.0"
   },
   "husky": {
     "hooks": {
