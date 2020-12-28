@@ -27,7 +27,9 @@
 	"vadimcn.vscode-lldb",
 	"mutantdino.resourcemonitor",
 	"davidanson.vscode-markdownlint",
-	"stkb.rewrap"
+	"stkb.rewrap",
+	"editorconfig.editorconfig",
+	"visualstudioexptteam.vscodeintellicode"
 ],
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
