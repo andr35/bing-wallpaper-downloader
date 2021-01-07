@@ -1,6 +1,7 @@
 use std::error::Error;
 use std::fmt::{Display, Formatter, Result};
 
+/// Any generic error thrown by th application while running.
 #[derive(Debug)]
 pub struct AppError {
   details: String,

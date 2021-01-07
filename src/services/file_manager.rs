@@ -4,11 +4,14 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::path::PathBuf;
 
+/// Default name given to the image when it is saved on disk.
 const DEFAULT_IMG_NAME: &str = ".wallpaper.jpg";
 
+/// Util service to manage image's files.
 pub struct FileManager {}
 
 impl FileManager {
+  /// Save an image on disk. If `output_path` is not passed, image will be saved in temp directory.
   pub fn save_wallpaper(data: &[u8], output_path: Option<&str>) -> Result<String, Box<dyn Error>> {
     let path = match output_path {
       Some(p) => PathBuf::from(p),
@@ -29,6 +32,7 @@ impl FileManager {
     };
   }
 
+  /// Copy an image in the folder where the wallpaper should be saved.
   pub fn copy_into_default_wallpaper_location(curr_path: &str) -> Result<String, Box<dyn Error>> {
     // Try to copy wallpaper in picture dirs -> if fail, do nothing
     let output_path_buf = match dirs::picture_dir() {

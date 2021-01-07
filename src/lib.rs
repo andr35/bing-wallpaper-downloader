@@ -1,11 +1,19 @@
-mod models;
-mod services;
+//! Bing Wallpaper Downloader
+//!
+//! Simple CLI application written in [Rust](https://www.rust-lang.org/) to download
+//! the Bing Image of the day and, optionally, set it as wallpaper or show a desktop
+//! notification with the image and its caption.
+
+pub mod models;
+pub mod services;
 
 use crate::models::AppError;
 use crate::services::{BingClient, FileManager, NotificationManager, WallpaperManager};
 use clap::ArgMatches;
 use std::error::Error;
 
+/// Given the commands and arguments passed from the user, it executes
+/// the commands.
 pub async fn run(app_matches: ArgMatches<'_>) -> Result<(), Box<dyn Error>> {
   // Run commands
   match app_matches.subcommand() {

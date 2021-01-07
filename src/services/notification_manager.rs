@@ -2,9 +2,11 @@ use crate::models::APP_NAME;
 use crate::services::WallpaperManager;
 use notify_rust::{Notification, Timeout};
 
+/// Utils service to create notifications
 pub struct NotificationManager {}
 
 impl NotificationManager {
+  /// Creates and show a desktop notification containing the title, the caption and the provided image.
   pub fn show_notification(
     title: &str,
     caption: &str,

@@ -1,3 +1,5 @@
+//! Services
+
 mod bing_client;
 mod file_manager;
 mod notification_manager;

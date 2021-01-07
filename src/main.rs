@@ -1,3 +1,9 @@
+//! Bing Wallpaper Downloader
+//!
+//! Simple CLI application written in [Rust](https://www.rust-lang.org/) to download
+//! the Bing Image of the day and, optionally, set it as wallpaper or show a desktop
+//! notification with the image and its caption.
+
 mod models;
 
 use crate::models::{APP_TITLE, APP_VERSION};

@@ -1,3 +1,7 @@
+//! Bing Client
+//!
+//! HTTP client wrapper to get data about the Bing image of the day
+
 use crate::models::{BingDataPayload, BingDataPayloadImage};
 use bytes::Bytes;
 use reqwest::header::ACCEPT;
@@ -9,9 +13,12 @@ const BING_DATA_PATH: &str = "/HPImageArchive.aspx";
 
 // const BING_URL: &'static str = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=8";
 
+/// HTTP client wrapper to get data about the Bing image of the day
 pub struct BingClient {}
 
 impl BingClient {
+  /// Fetch data about the image of the day.
+  /// It is possible to get information about past days passing how many days go back.
   pub async fn fetch_bing_data_image(
     prev_days: i8,
   ) -> Result<BingDataPayloadImage, reqwest::Error> {
@@ -25,6 +32,8 @@ impl BingClient {
     Ok(img)
   }
 
+  /// Fetch all list of images of th day available.
+  /// `idx` is the index of the list of images from where start listing the information.
   async fn fetch_bing_data(idx: i8) -> Result<BingDataPayload, reqwest::Error> {
     let mut url = Url::parse(BING_BASE_URL).unwrap();
     url.set_path(BING_DATA_PATH);
@@ -46,6 +55,7 @@ impl BingClient {
     );
   }
 
+  /// Fetch an image given its url.
   pub async fn fetch_bing_photo(photo_path: &str) -> Result<Bytes, reqwest::Error> {
     let url = Url::parse(BING_BASE_URL).unwrap().join(photo_path).unwrap();
 

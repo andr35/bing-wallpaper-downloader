@@ -1,11 +1,13 @@
 use serde::{Deserialize};
 
+/// Payload returned by the Bing endpoint.
 #[derive(Deserialize)] // Debug
 pub struct BingDataPayload {
   pub images: Vec<BingDataPayloadImage>,
   pub tooltips: BingDataPayloadTooltips,
 }
 
+/// Data about a single image
 #[derive(Deserialize)] // Debug
 pub struct BingDataPayloadImage {
   pub startdate: String,
@@ -25,6 +27,7 @@ pub struct BingDataPayloadImage {
   pub hs: Vec<i8>,
 }
 
+/// Other data
 #[derive(Deserialize)] // Debug
 pub struct BingDataPayloadTooltips {
   pub loading: String,
