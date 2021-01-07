@@ -20,7 +20,7 @@ impl NotificationManager {
       .body(caption)
       .image_path(img_url)
       .appname(APP_NAME)
-      .timeout(Timeout::Never)
+      .timeout(Timeout::Milliseconds(60000)) // Expire after 60s
       .action("default", "default")
       .action("set_wp", "Set as Wallpaper")
       .action("cancel", "Cancel")
