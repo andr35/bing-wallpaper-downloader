@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](///compare/v0.2.0...v0.3.0) (2021-11-04)
+
+
+### Features
+
+* ✨ set default notification timeout e6cbfd8
+* **extra:** add desktop file a71d843
+* update rust deps e8077ac
+
 ## [0.2.0](///compare/v0.1.1...v0.2.0) (2020-12-27)
 
 
