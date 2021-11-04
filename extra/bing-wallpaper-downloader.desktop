@@ -1,0 +1,10 @@
+[Desktop Entry]
+
+Type=Application
+Version=1.0
+Name=Bing Wallpaper Downloader
+Comment=Set the Bing image of the day as desktop wallpaper
+Exec=bing-wallpaper-downloader download -s
+Icon=wallpaper
+Terminal=false
+Categories=Utility
