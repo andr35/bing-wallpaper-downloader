@@ -1,4 +1,4 @@
-use serde::{Deserialize};
+use serde::Deserialize;
 
 /// Payload returned by the Bing endpoint.
 #[derive(Deserialize)] // Debug
