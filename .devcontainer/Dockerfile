@@ -28,7 +28,7 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | b
 # Configure ZSH Shell ---------------------------------------------------------
 
 # Configure oh-my-zsh
-RUN sed -i 's/plugins=(.*)/plugins=(git rust cargo npm)/g' ~/.zshrc
+RUN sed -i 's/plugins=(.*)/plugins=(git rust npm)/g' ~/.zshrc
 # Configure powerlevel10k
 ENV POWERLEVEL9K_TRANSIENT_PROMPT=always
 # Install powerlevel10k
