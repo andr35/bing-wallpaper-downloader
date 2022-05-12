@@ -15,8 +15,8 @@ sudo apt-get install libdbus-1-dev
 Build:
 
 ```bash
-cargo build          # Debug version
-cargo build --relase # Release version
+cargo build           # Debug version
+cargo build --release # Release version
 ```
 
 ## How to use
