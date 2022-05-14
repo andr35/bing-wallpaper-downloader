@@ -7,13 +7,18 @@
   "repository": "https: //github.com/andr35/national-geographic-wallpaper",
   "private": true,
   "scripts": {
+    "commit": "git-cz",
     "release:patch": "standard-version --release-as patch",
     "release:minor": "standard-version --release-as minor",
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@commitlint/cli": "^16.2.4",
+    "@commitlint/cli": "^16.3.0",
     "@commitlint/config-conventional": "^16.2.4",
+    "@commitlint/cz-commitlint": "^16.3.0",
+    "@commitlint/prompt-cli": "^16.3.0",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
     "devmoji": "^2.3.0",
     "husky": "^8.0.1",
     "standard-version": "^9.3.2"
