@@ -10,9 +10,10 @@
     "commit": "git-cz",
     "release:patch": "standard-version --release-as patch",
     "release:minor": "standard-version --release-as minor",
-    "prepare": "husky install"
+    "prepare": "npx @arkweid/lefthook install"
   },
   "devDependencies": {
+    "@arkweid/lefthook": "^0.7.7",
     "@commitlint/cli": "^16.3.0",
     "@commitlint/config-conventional": "^16.2.4",
     "@commitlint/cz-commitlint": "^16.3.0",
@@ -20,7 +21,7 @@
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
     "devmoji": "^2.3.0",
-    "husky": "^8.0.1",
+    "inquirer": "^8.2.4",
     "standard-version": "^9.3.2"
   }
 }

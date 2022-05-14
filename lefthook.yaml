@@ -1,0 +1,19 @@
+# EXAMPLE USAGE
+# Refer for explanation to following link:
+# https://github.com/evilmartians/lefthook/blob/master/docs/full_guide.md
+#
+
+commit-msg:
+  commands:
+    commitlint:
+      run: npx --no-install commitlint --edit $1
+
+pre-commit:
+  commands:
+    format:
+      run: cargo fmt
+
+prepare-commit-msg:
+  commands:
+    devmoji:
+      run: npx --no-install devmoji -e
