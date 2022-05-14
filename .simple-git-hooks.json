@@ -1,0 +1,5 @@
+{
+  "commit-msg": "npx --no-install commitlint --edit \"$1\"",
+  "pre-commit": "cargo fmt",
+  "prepare-commit-msg": "npx --no-install devmoji -e"
+}
