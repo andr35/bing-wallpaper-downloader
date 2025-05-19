@@ -25,11 +25,13 @@ pub async fn run(app_matches: ArgMatches<'_>) -> Result<(), Box<dyn Error>> {
         .value_of("prev-days")
         .expect("Missing prev day")
         .parse::<i8>()?;
+      
+      let uhd = sub_m.is_present("uhd");
 
       // First -> Get image info
       let img = BingClient::fetch_bing_data_image(prev_days).await?;
       let img_url = img.url.clone();
-      let img_bytes = BingClient::fetch_bing_photo(&img_url).await?;
+      let img_bytes = BingClient::fetch_bing_photo(&img_url, &uhd).await?;
       // Save image in fs
       let img_save_path =
         FileManager::save_wallpaper(img_bytes.as_ref(), sub_m.value_of("output-path"))?;
