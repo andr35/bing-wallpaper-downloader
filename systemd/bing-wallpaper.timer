@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily Bing wallpaper update at midnight
+
+[Timer]
+OnCalendar=*-*-* 00:00:00
+Persistent=true
+WakeSystem=true
+Unit=bing-wallpaper.service
+
+[Install]
+WantedBy=timers.target
