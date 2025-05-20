@@ -56,8 +56,15 @@ impl BingClient {
   }
 
   /// Fetch an image given its url.
-  pub async fn fetch_bing_photo(photo_path: &str) -> Result<Bytes, reqwest::Error> {
-    let url = Url::parse(BING_BASE_URL).unwrap().join(photo_path).unwrap();
+  pub async fn fetch_bing_photo(photo_path: &str, uhd: &bool) -> Result<Bytes, reqwest::Error> {
+
+    let photo_path = if *uhd {
+      photo_path.replace("1920x1080", "UHD")
+    } else {
+      photo_path.to_string()
+    };
+
+    let url = Url::parse(BING_BASE_URL).unwrap().join(&photo_path).unwrap();
 
     return Ok(
       reqwest::Client::new()

@@ -1,0 +1,10 @@
+[Unit]
+Description=Download and set Bing Wallpaper at session start
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/sh -c 'bing_wallpaper_downloader download -s'
+
+[Install]
+WantedBy=default.target

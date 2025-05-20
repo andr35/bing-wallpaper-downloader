@@ -67,8 +67,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
           Arg::with_name("set-as-wallpaper")
             .long("set-as-wallpaper")
             .short("s")
-            .help("Set the downloaded image a s desktop wallpaper"),
-        ),
+            .help("Set the downloaded image as desktop wallpaper"),
+        )
+        .arg(
+          Arg::with_name("uhd")
+            .long("uhd")
+            .short("u")
+            .help("Download the UHD version of the wallpaper"),
+        )
     )
     .get_matches();
 

@@ -16,7 +16,7 @@ bytes = "1"
 dirs = "4.0"
 notify-rust = "4"
 # wallpaper = "3.2"
-wallpaper = { git = "https://github.com/andr35/wallpaper.rs" }
+wallpaper = { git = "https://github.com/reujab/wallpaper.rs" }
 log = "0.4"
 env_logger = "0.9"
 openssl = { version = "0.10", features = ["vendored"] }

@@ -19,6 +19,16 @@ cargo build           # Debug version
 cargo build --release # Release version
 ```
 
+## Install
+
+Alternatively, you can directly install the application using `cargo`:
+
+```bash
+cargo install --path . --root ~/.local
+```
+
+`~/.local/bin` should be already in your `PATH` environment variable.
+
 ## How to use
 
 Read the help message:
@@ -59,6 +69,14 @@ with the new photo of the day, append this line to the `~/.zlogin` file:
 
 ```bash
 <PROJECT_PATH>/target/release/bing_wallpaper_downloader -n > /dev/null &
+```
+
+In alternative, `systemd` can be used to run the application at login or periodically using a timer. Files can be found in the `systemd` fodler in the repo. 
+
+Just copy the files in the `~/.config/systemd/user` folder and run:
+
+```bash
+systemctl --user enable --now bing-wallpaper.service bing-wallpaper.timer
 ```
 
 ## Development
